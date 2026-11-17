@@ -238,7 +238,12 @@ Other flag values seen in the wild, decoded rather than guessed:
 ## Final alpha is texture alpha × vertex alpha
 
 - A missing factor counts as **1**, not 0
-- **BC1/DXT1 has no alpha channel**, so its factor is 1 — painted vertex alpha alone decides the fade
+- **BC1/DXT1 has no 8-bit alpha** — no fade, only 1 or 0
+- Its one-bit alpha lives in the optional **punch-through** mode: a block encoded with `color0 <= color1` decodes to three colors plus index 3 = transparent **black**, so **alpha 0 or 255 and nothing between**
+- That transparency is not free: the color of a punched texel is **forced to 0**. A BC1 texture can hide a texel, but only by making it black
+- So for a smooth fade a BC1 factor is 1, and **painted vertex alpha alone decides** — which is why these tools work on vanilla-derived landscape textures at all
+- The mode is **implicit in the block data**, so a re-encode that lands in 4-color mode silently makes the texture opaque. That is the reason to prefer BC3/BC7 for a blank that must stay blank
+- Measured on this list: `Remove Small Rocks\textures\landscape\grass\rocksgrass01.dds` is a 4×4 DXT1, 136 bytes, one block with `c0=0x0000 c1=0xFFFF` and all 16 texels on index 3 — a punched-out blank that decodes to transparent black
 - A mesh with **no vertex colors** has a vertex factor of 1, so the texture's alpha alone decides
 - Both present means they **multiply** — a painted 128 over a texture alpha of 0.5 lands at 0.25
 
