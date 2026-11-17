@@ -2,11 +2,11 @@
 
 All notable changes to **Nif Vertex Processor**.
 
-Versioning is SemVer with a `0P` prefix — `0P1.0.0`, `0P1.1.0` — the same scheme as the author's other tools.
+Versioning is SemVer with a `0P` prefix — `0P0.0.0`, `0P0.1.0` — the same scheme as the author's other tools.
 
 ---
 
-## 0P1.0.0-pre.1 — the first published build
+## 0P0.0.0 — the first published build
 
 The version this tool has been at while it was being used, now packaged.
 
@@ -80,7 +80,7 @@ The version this tool has been at while it was being used, now packaged.
 
 ---
 
-## 0P1.0.0-pre.1 — known limits
+## 0P0.0.0 — known limits
 
 - Windows only. The shell integration is PowerShell
 - The studio preview is a coverage check. It does not shade materials — NifSkope remains the authority

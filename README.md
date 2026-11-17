@@ -289,13 +289,14 @@ and the border cannot become a seam. `--replace` overrides that.
 
 ## Versioning
 
-SemVer with a `0P` prefix — `0P1.0.0` — the same scheme as the author's other tools.
+SemVer with a `0P` prefix, the same scheme as the author's other tools.
 
+- **`0P0.0.0`** is this build: nothing was published before it, so the first number is zero
 - `MAJOR` — an existing plan file, or a NIF written by an earlier version, stops working
 - `MINOR` — a new operation, or a batch of fixes
 - `PATCH` — one small fix
 
-Pre-releases carry a `-pre.N` suffix and are marked as pre-releases on GitHub.
+A build can be published as a GitHub **pre-release** while its version stays a plain `0P` number.
 
 ---
 
