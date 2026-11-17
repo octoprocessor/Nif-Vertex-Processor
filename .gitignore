@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+
+# Tool output — the tools always write NEW files, never over a source
+*_mask.nif
+*_inv.nif
+*_weld.nif
+*_edit.nif
+
+# Local scratch
+_tmp/
+_recon/
