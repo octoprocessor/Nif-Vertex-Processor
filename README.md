@@ -1,8 +1,8 @@
 # Nif Vertex Processor
 
-Tools for reading and writing **vertex-colour alpha** and **mask shader flags** in Skyrim SE `.nif` meshes.
+Tools for reading and writing **vertex-color alpha** and **mask shader flags** in Skyrim SE `.nif` meshes.
 
-Built to paint coverage onto landscape meshes — the edge mask that makes a ground texture fade into its neighbour — and to
+Built to paint coverage onto landscape meshes — the edge mask that makes a ground texture fade into its neighbor — and to
 weld and re-UV meshes that need it.
 
 Windows. Python 3.10 or newer. **Standard library only** — nothing to install.
@@ -50,7 +50,7 @@ if you run `audit` by hand, pass `--tsv <path>`.
 
 Three tabs, everything in memory, one Save.
 
-- **Shapes** — a compact table: name, op, vertices, triangles, ring, colour, property, block, texture
+- **Shapes** — a compact table: name, op, vertices, triangles, ring, color, property, block, texture
 - **Operations** — merge + weld, merge without welding, reUV, invert alpha, blend edges, blend + buffer N, blend gradient N, all white, reset
 - **Preview** — shades triangles by vertex alpha, so a mask can be checked before it is saved
 
@@ -76,7 +76,7 @@ Details worth knowing:
 
 ### `nif_vertex_gui.py` — the alpha mask
 
-Lists every shape with its colour and alpha state, and previews the mask with the merge applied.
+Lists every shape with its color and alpha state, and previews the mask with the merge applied.
 
 ```
 nif_vertex_gui.py <mesh.nif> [--out <folder>] [--config plan.tsv]
@@ -94,7 +94,7 @@ nif_weld_uv_gui.py <mesh.nif> [--out <folder>] [--config plan.tsv]
 ```
 
 - One vertex per distinct position, then the triangles are unfolded and relaxed
-- Colours merge by mean, **alpha by median** — one vertex left at alpha 0 among 255s means "covered", and a mean would undo it
+- Colors merge by mean, **alpha by median** — one vertex left at alpha 0 among 255s means "covered", and a mean would undo it
 - Judge it by the 5–95 % length/texel band, not by max/min
 
 ### `vertex_alpha_mask.py` — mask, from the command line
@@ -137,7 +137,7 @@ python invert_vertex_alpha.py <mesh.nif> --apply
 python invert_vertex_alpha.py <folder> --recurse --name 'tri*' --apply
 ```
 
-- `--add-missing` gives shapes that have no vertex colours an opaque one first (off by default, like SNIFF)
+- `--add-missing` gives shapes that have no vertex colors an opaque one first (off by default, like SNIFF)
 - `--all-black ask|flip|keep|skip` decides what an all-zero result means
 - Writes `<stem>_inv.nif` beside the source
 
@@ -231,7 +231,7 @@ Other flag values seen in the wild, decoded rather than guessed:
 - `0x12EC` — alpha **test** on, blending off, test function 4. A hard cutout: `alpha == 0` is discarded, everything else is solid
 - `0x10CF` — blending on with source 7 / destination 6 = One/One, i.e. **additive**
 - A cutout shape with a painted mask reads as `test-painted` — a cutout, not a fade. That is reported separately, never counted as work outstanding
-- A shape with **no** vertex colours is not a defect. With no vertex colour to read, blending comes from the texture's alpha channel
+- A shape with **no** vertex colors is not a defect. With no vertex color to read, blending comes from the texture's alpha channel
 
 ---
 
@@ -239,7 +239,7 @@ Other flag values seen in the wild, decoded rather than guessed:
 
 - A missing factor counts as **1**, not 0
 - **BC1/DXT1 has no alpha channel**, so its factor is 1 — painted vertex alpha alone decides the fade
-- A mesh with **no vertex colours** has a vertex factor of 1, so the texture's alpha alone decides
+- A mesh with **no vertex colors** has a vertex factor of 1, so the texture's alpha alone decides
 - Both present means they **multiply** — a painted 128 over a texture alpha of 0.5 lands at 0.25
 
 ---
@@ -253,7 +253,7 @@ python nif_vertex.py roundtrip <file.nif>
 ```
 
 - `selftest` — 72 checks over the reader and writer
-- `audit` — per-shape colour, alpha flags and shader flags, to a TSV; default `_recon\nif_vertex_audit.tsv`
+- `audit` — per-shape color, alpha flags and shader flags, to a TSV; default `_recon\nif_vertex_audit.tsv`
 - `roundtrip` — a no-op save must be byte-identical; this is what caught two header conventions
 
 A mask **only ever darkens**: the written alpha is `min(mask, original)`, so an area the artist already faded stays faded
@@ -308,11 +308,11 @@ Expect rough edges in the windows, not in the files they write.
 
 ---
 
-## Licence
+## License
 
 **GPL-3.0**, in [LICENSE](LICENSE) — the FSF text, unmodified.
 
-- The same licence the rest of this chain publishes under: Community Shaders and AutoSeasons are GPL-3.0, and NifSkope
+- The same license the rest of this chain publishes under: Community Shaders and AutoSeasons are GPL-3.0, and NifSkope
   ships this same GPL-3.0 text as `LICENSE-GPL-3.0.txt` (`sha256 4D3E484B…`)
 - Use, change and redistribute it freely
 - Distribute a changed version under GPL-3.0 as well, and say what you changed

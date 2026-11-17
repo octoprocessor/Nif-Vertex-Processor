@@ -455,9 +455,9 @@ class Shape(object):
             blk[base + v * self.stride] = 0 if a < 0 else (255 if a > 255 else int(a))
 
     def set_colors(self, colors):
-        """Write one BGRA colour per vertex, each component clamped to 0-255. Adds colours when the shape has none."""
+        """Write one BGRA color per vertex, each component clamped to 0-255. Adds colors when the shape has none."""
         if len(colors) != self.vert:
-            raise NifError("%s: %d colours for %d vertices" % (self.name, len(colors), self.vert))
+            raise NifError("%s: %d colors for %d vertices" % (self.name, len(colors), self.vert))
         self.add_colors()
         blk = self.nif.blocks[self.index]
         for v, c in enumerate(colors):
@@ -1310,7 +1310,7 @@ def selftest():
     check("in place: block size unchanged", len(n2.blocks[0]) == before, (len(n2.blocks[0]), before))
     check("in place: alphas", Nif(n2.serialize()).shapes()[0].alphas() == [1, 2, 3, 4])
 
-    # 6b. out-of-range values clamp instead of wrapping, and colours can be written component-wise
+    # 6b. out-of-range values clamp instead of wrapping, and colors can be written component-wise
     s.set_alphas([300, -5, 128, 255])
     check("alphas clamp: 300 -> 255, -5 -> 0", Nif(n2.serialize()).shapes()[0].alphas() == [255, 0, 128, 255],
           Nif(n2.serialize()).shapes()[0].alphas())

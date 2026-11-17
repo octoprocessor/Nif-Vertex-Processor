@@ -20,7 +20,7 @@ The version this tool has been at while it was being used, now packaged.
   - Painter's-algorithm preview shaded by vertex alpha
 
 - **`nif_vertex_gui.py`** — the alpha mask window
-  - Every shape listed with its colour and alpha state
+  - Every shape listed with its color and alpha state
   - Per-shape settings, plan-file driven or typed in the table
   - `ring` column: the median triangle edge length per shape, so one global ring count can be judged
 
@@ -35,7 +35,7 @@ The version this tool has been at while it was being used, now packaged.
 
 - **`nif_weld_uv.py`** — weld duplicate vertices and rebuild the UV map
   - Texel density calibrated to the original by mean, not by eye
-  - Colour merged by mean, **alpha by median**
+  - Color merged by mean, **alpha by median**
 
 - **`nif_shape_ops.py`** — merge several shapes into one copied shape
   - Originals untouched
@@ -89,9 +89,9 @@ The version this tool has been at while it was being used, now packaged.
 
 ---
 
-## 0P0.0.0 — licence
+## 0P0.0.0 — license
 
 - **GPL-3.0**, in `LICENSE` — the FSF text, unmodified
-- The same licence as Community Shaders and AutoSeasons, and the same GPL-3.0 text NifSkope ships as
+- The same license as Community Shaders and AutoSeasons, and the same GPL-3.0 text NifSkope ships as
   `LICENSE-GPL-3.0.txt`
 - `Copyright (C) 2026 octoprocessor`
