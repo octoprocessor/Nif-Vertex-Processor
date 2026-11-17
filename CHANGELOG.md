@@ -63,7 +63,11 @@ The version this tool has been at while it was being used, now packaged.
 
 ### Safety
 
-- Sources are never edited. Output is always a new file: `<stem>_mask.nif`, `_inv`, `_weld`, `_edit`
+- The command-line tools never edit the source. Output is always a new file: `<stem>_mask.nif`, `_inv`, `_weld`
+- The studio's Save writes **the file you opened**, after backing it up to `<stem>.bak.nif` on load.
+  `--save-copy` or `--out DIR` writes `<stem>_edit.nif` instead
+- A mask **only ever darkens**: written alpha is `min(mask, original)`, so an artist's fade is preserved and the
+  border cannot become a seam. `--replace` overrides it
 - An all-black mask is stopped **before anything is written**, and asks: flip it to white, or skip the shape
 - There is no "write it all black" answer. A shape that should not exist is culled by the patcher before runtime,
   not painted invisible

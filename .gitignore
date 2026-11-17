@@ -8,11 +8,12 @@ __pycache__/
 Thumbs.db
 desktop.ini
 
-# Tool output — the tools always write NEW files, never over a source
+# Tool output — the tools always write NEW files, except the studio's Save, which backs up first
 *_mask.nif
 *_inv.nif
 *_weld.nif
 *_edit.nif
+*.bak.nif
 
 # Local scratch and build output
 _tmp/

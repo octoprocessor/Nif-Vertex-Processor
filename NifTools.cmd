@@ -1,13 +1,17 @@
 @echo off
 rem Nif Vertex Processor - launcher menu.
 rem Reads nothing, writes nothing. Starts one of the tools in this folder.
+rem Every GUI needs a .nif, so this asks for one when it was not given on the command line.
+rem Usage: NifTools.cmd [choice] ["path\to\mesh.nif"]
 setlocal EnableExtensions
 cd /d "%~dp0"
 
 set "PY="
-where py >nul 2>nul && set "PY=py -3"
+where py >nul 2>nul
+if not errorlevel 1 set "PY=py -3"
 if not defined PY (
-  where python >nul 2>nul && set "PY=python"
+  where python >nul 2>nul
+  if not errorlevel 1 set "PY=python"
 )
 if not defined PY goto :nopython
 
@@ -16,7 +20,11 @@ for /f "delims=" %%I in ('%PY% -c "import os,sys;print(os.path.dirname(sys.execu
 if defined PYDIR if exist "%PYDIR%\pythonw.exe" set "PYW=%PYDIR%\pythonw.exe"
 
 set "CHOICE=%~1"
-if not "%CHOICE%"=="" goto :run
+set "NIF=%~2"
+if not defined CHOICE goto :menu
+goto :run
+
+:menu
 cls
 echo.
 echo   Nif Vertex Processor
@@ -33,51 +41,77 @@ echo.
 echo   7  Install right-click menu  (per-user, no shortcuts)
 echo   0  Exit
 echo.
+set "CHOICE="
 set /p "CHOICE=  Choose [0-7]: "
-if "%CHOICE%"=="" exit /b 1
+if not defined CHOICE exit /b 1
 if "%CHOICE%"=="0" exit /b 0
 
 :run
 if "%CHOICE%"=="1" (
-  start "" "%PYW%" "nif_studio.py" %2 %3
-  exit /b 0
+  set "SCRIPT=nif_studio.py"
+  goto :gui
 )
 if "%CHOICE%"=="2" (
-  start "" "%PYW%" "nif_vertex_gui.py" %2 %3
-  exit /b 0
+  set "SCRIPT=nif_vertex_gui.py"
+  goto :gui
 )
 if "%CHOICE%"=="3" (
-  start "" "%PYW%" "nif_weld_uv_gui.py" %2 %3
-  exit /b 0
+  set "SCRIPT=nif_weld_uv_gui.py"
+  goto :gui
 )
-if "%CHOICE%"=="4" (
-  %PY% "nif_vertex.py" selftest
-  echo.
-  pause
-  exit /b 0
-)
-if "%CHOICE%"=="5" (
-  set /p "TARGET=  Mesh file or folder: "
-  %PY% "nif_vertex.py" audit "%TARGET%" --recurse
-  echo.
-  pause
-  exit /b 0
-)
-if "%CHOICE%"=="6" (
-  set /p "TARGET=  Mesh file: "
-  %PY% "nif_block_dump.py" "%TARGET%"
-  echo.
-  pause
-  exit /b 0
-)
-if "%CHOICE%"=="7" (
-  powershell -NoProfile -ExecutionPolicy Bypass -File "Register-NifToolsMenu.ps1" -Install
-  echo.
-  pause
-  exit /b 0
-)
+if "%CHOICE%"=="4" goto :selftest
+if "%CHOICE%"=="5" goto :audit
+if "%CHOICE%"=="6" goto :dump
+if "%CHOICE%"=="7" goto :menuinstall
 echo   Not a choice: %CHOICE%
 exit /b 1
+
+:gui
+if defined NIF goto :gui_run
+echo.
+set /p "NIF=  Mesh file (drag one here): "
+:gui_run
+if not defined NIF (
+  echo   No file given, nothing started.
+  exit /b 1
+)
+if not exist "%NIF%" (
+  echo   Not found: %NIF%
+  exit /b 1
+)
+echo   Opening %SCRIPT% with %NIF%
+start "" "%PYW%" "%SCRIPT%" "%NIF%"
+exit /b 0
+
+:selftest
+%PY% "nif_vertex.py" selftest
+echo.
+pause
+exit /b 0
+
+:audit
+echo.
+set /p "TARGET=  Mesh file or folder: "
+if not defined TARGET exit /b 1
+%PY% "nif_vertex.py" audit "%TARGET%" --recurse
+echo.
+pause
+exit /b 0
+
+:dump
+echo.
+set /p "TARGET=  Mesh file: "
+if not defined TARGET exit /b 1
+%PY% "nif_block_dump.py" "%TARGET%"
+echo.
+pause
+exit /b 0
+
+:menuinstall
+powershell -NoProfile -ExecutionPolicy Bypass -File "Register-NifToolsMenu.ps1" -Install
+echo.
+pause
+exit /b 0
 
 :nopython
 echo.
