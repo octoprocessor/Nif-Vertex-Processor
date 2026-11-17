@@ -14,6 +14,7 @@ desktop.ini
 *_weld.nif
 *_edit.nif
 
-# Local scratch
+# Local scratch and build output
 _tmp/
 _recon/
+dist/
