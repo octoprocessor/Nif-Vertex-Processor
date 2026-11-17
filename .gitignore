@@ -14,6 +14,7 @@ desktop.ini
 *_weld.nif
 *_edit.nif
 *.bak.nif
+nif_vertex_audit*.tsv
 
 # Local scratch and build output
 _tmp/

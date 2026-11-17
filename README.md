@@ -14,9 +14,12 @@ Windows. Python 3.10 or newer. **Standard library only** — nothing to install.
 - **Core reader/writer** — one implementation of the NIF layout, shared by every front end
 - **A studio window** — shapes, operations and a preview in one place
 - **Two focused GUIs** — the alpha mask, and the weld + UV tool
-- **Four command-line tools** — mask, invert, weld + UV, shape operations
-- **An inspector** — what is actually inside a `.nif`
+- **Six command-line tools** — mask, invert, weld + UV, shape operations, block inspector, shape renamer
 - **A shell integration script** — right-click a `.nif` and open the tool
+- **A launcher menu** — `NifTools.cmd`, so nothing has to be typed
+
+The windows carry their own titles — **0cto shape studio**, **0cto vertex-alpha mask**, **0cto weld + UV**. One tool,
+three windows.
 
 ---
 
@@ -33,7 +36,11 @@ NifTools.cmd                          # the menu
 NifTools.cmd 2 "D:\meshes\mountaincliff01.nif"
 ```
 
-Nothing is added to `PATH`, and no file is written outside the folder you unpack into.
+Nothing is added to `PATH`. Every tool writes its output next to the file it read, or where you point it.
+
+One exception, now handled by the menu: `nif_vertex.py audit` without `--tsv` resolves `_recon\nif_vertex_audit.tsv`
+relative to the folder **above** the unpack folder. The menu passes `--tsv` so the report lands beside the launcher;
+if you run `audit` by hand, pass `--tsv <path>`.
 
 ---
 
@@ -241,12 +248,12 @@ Other flag values seen in the wild, decoded rather than guessed:
 
 ```
 python nif_vertex.py selftest
-python nif_vertex.py audit <tree> --recurse
+python nif_vertex.py audit <tree> --recurse --tsv report.tsv
 python nif_vertex.py roundtrip <file.nif>
 ```
 
-- `selftest` — 55 checks over the reader and writer
-- `audit` — per-shape colour, alpha flags and shader flags, to a TSV
+- `selftest` — 72 checks over the reader and writer
+- `audit` — per-shape colour, alpha flags and shader flags, to a TSV; default `_recon\nif_vertex_audit.tsv`
 - `roundtrip` — a no-op save must be byte-identical; this is what caught two header conventions
 
 A mask **only ever darkens**: the written alpha is `min(mask, original)`, so an area the artist already faded stays faded

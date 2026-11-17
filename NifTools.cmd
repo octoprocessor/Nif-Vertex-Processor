@@ -93,8 +93,9 @@ exit /b 0
 echo.
 set /p "TARGET=  Mesh file or folder: "
 if not defined TARGET exit /b 1
-%PY% "nif_vertex.py" audit "%TARGET%" --recurse
+%PY% "nif_vertex.py" audit "%TARGET%" --recurse --tsv "%~dp0nif_vertex_audit.tsv"
 echo.
+echo   Report: %~dp0nif_vertex_audit.tsv
 pause
 exit /b 0
 

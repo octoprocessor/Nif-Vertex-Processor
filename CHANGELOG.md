@@ -74,7 +74,7 @@ The version this tool has been at while it was being used, now packaged.
 
 ### Self-tests
 
-- `python nif_vertex.py selftest` — 55 checks
+- `python nif_vertex.py selftest` — 72 checks
 - `python nif_vertex.py roundtrip <file>` — a no-op save must be byte-identical
 - `python nif_vertex.py audit <tree> --recurse` — per-shape state to a TSV
 
