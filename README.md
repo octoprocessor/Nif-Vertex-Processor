@@ -283,13 +283,13 @@ and the border cannot become a seam. `--replace` overrides that.
 
 - Sources are never edited by the command-line tools. `--apply` writes a **new** file next to the source
 - `--outdir` sends it anywhere else, including into a live modlist folder
-- One development test, `nif_studio_math_test.py`, writes a log into a `_recon\` folder used by the author's own workspace. It is a headless self-test, not part of the normal workflow
+- One development test, `nif_studio_math_test.py`, writes a log into a `_recon\` folder in my own workspace. It is a headless self-test, not part of the normal workflow
 
 ---
 
 ## Versioning
 
-SemVer with a `0P` prefix, the same scheme as the author's other tools.
+SemVer with a `0P` prefix, the same scheme I use on my other tools.
 
 - **`0P0.0.0`** is this build: nothing was published before it, so the first number is zero
 - `MAJOR` — an existing plan file, or a NIF written by an earlier version, stops working
@@ -302,7 +302,7 @@ A build can be published as a GitHub **pre-release** while its version stays a p
 
 ## Status
 
-**Pre-release.** The tools are in daily use on the author's own meshes, and the command-line surface is stable.
+**Pre-release.** I use these daily on my own meshes, and the command-line surface is stable.
 
 Expect rough edges in the windows, not in the files they write.
 

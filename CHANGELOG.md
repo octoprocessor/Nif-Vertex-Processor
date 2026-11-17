@@ -2,7 +2,7 @@
 
 All notable changes to **Nif Vertex Processor**.
 
-Versioning is SemVer with a `0P` prefix — `0P0.0.0`, `0P0.1.0` — the same scheme as the author's other tools.
+Versioning is SemVer with a `0P` prefix — `0P0.0.0`, `0P0.1.0` — the same scheme I use on my other tools.
 
 ---
 
