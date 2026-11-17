@@ -86,4 +86,12 @@ The version this tool has been at while it was being used, now packaged.
 - The studio preview is a coverage check. It does not shade materials — NifSkope remains the authority
 - The weld tool is an unfold plus relaxation, not LSCM or ABF on closed geometry
 - No undo outside the studio window
-- No licence file yet
+
+---
+
+## 0P0.0.0 — licence
+
+- **GPL-3.0**, in `LICENSE` — the FSF text, unmodified
+- The same licence as Community Shaders and AutoSeasons, and the same GPL-3.0 text NifSkope ships as
+  `LICENSE-GPL-3.0.txt`
+- `Copyright (C) 2026 octoprocessor`

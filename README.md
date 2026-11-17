@@ -310,4 +310,14 @@ Expect rough edges in the windows, not in the files they write.
 
 ## Licence
 
-No licence file yet — that is a decision still to be made, not an oversight to be read as permission.
+**GPL-3.0**, in [LICENSE](LICENSE) — the FSF text, unmodified.
+
+- The same licence the rest of this chain publishes under: Community Shaders and AutoSeasons are GPL-3.0, and NifSkope
+  ships this same GPL-3.0 text as `LICENSE-GPL-3.0.txt` (`sha256 4D3E484B…`)
+- Use, change and redistribute it freely
+- Distribute a changed version under GPL-3.0 as well, and say what you changed
+- There is no warranty
+
+```
+Copyright (C) 2026 octoprocessor
+```
