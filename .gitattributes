@@ -1,0 +1,5 @@
+# Byte fidelity: the shipped files are also the working copies in a tool tree, and a clone has to
+# match them exactly, so git must not rewrite line endings on the way in or out.
+# Without this, `core.autocrlf = true` turns every LF file into CRLF on checkout and the
+# "byte-identical copy" claim stops being true on any other machine.
+* -text
